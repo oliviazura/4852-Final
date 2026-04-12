@@ -9,13 +9,12 @@ data = data.reset_index(drop = True)
 data = data[data['Age'] <= 22]
 data = data[data['Degree'].str.startswith('B')]
 
-#drop unneccessary columns
-data = data.drop(columns = ["id","City","Job Satisfaction", "Work Pressure", "Profession"])
-
 #convert 10 point cgpa to 4 point gpa
 data["GPA"] = data["CGPA"] / 10 * 4
 data["GPA"] = data["GPA"].round(2)
-data = data.drop(columns= ["CGPA"])
+
+#drop unneccessary columns
+data = data.drop(columns = ["id","City","Job Satisfaction", "Work Pressure", "Profession", "CGPA"])
 
 #save processed data
 data.to_csv('data/processed_data.csv', index=False)
