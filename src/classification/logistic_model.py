@@ -57,25 +57,26 @@ preprocessing = ColumnTransformer([
     ("num", num_pipeline, data_num)
 ])
 
-#pipeline for logistic regression, using lasso for feature selection
-data_pipeline = Pipeline([
+#pipeline for logistic regression, using ridge regression as regularization
+logistic_pipeline = Pipeline([
     ("preprocessing", preprocessing),
-    ("model", LogisticRegression(l1_ratio= 1, solver = 'saga'))
+    ("model", LogisticRegression())
 ])
 
-data_pipeline.fit(x_train, y_train)
-train_predictions = data_pipeline.predict(x_train)
+logistic_pipeline.fit(x_train, y_train)
+train_predictions = logistic_pipeline.predict(x_train)
 
 train_cm = confusion_matrix(y_train, train_predictions)
 print(train_cm)
 
-test_predictions = data_pipeline.predict(x_test)
+test_predictions = logistic_pipeline.predict(x_test)
 
 
 test_cm = confusion_matrix(y_test, test_predictions)
 print(test_cm)
 
 cm_display = ConfusionMatrixDisplay(confusion_matrix = test_cm, display_labels=["Not Depressed", "Depressed"])
+cm_display.plot()
 plt.savefig("visuals/logistic_confusion_matrix.png")
 
 f1 = f1_score(y_test, test_predictions)
