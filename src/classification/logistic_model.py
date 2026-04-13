@@ -11,6 +11,7 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.model_selection import cross_val_score
 from sklearn.metrics import f1_score
 
 #import preprocessed data
@@ -56,12 +57,11 @@ preprocessing = ColumnTransformer([
     ("num", num_pipeline, data_num)
 ])
 
-#pipeline for logistic regression
+#pipeline for logistic regression, using lasso for feature selection
 data_pipeline = Pipeline([
     ("preprocessing", preprocessing),
-    ("model", LogisticRegression())
+    ("model", LogisticRegression(l1_ratio= 1, solver = 'saga'))
 ])
-
 
 data_pipeline.fit(x_train, y_train)
 train_predictions = data_pipeline.predict(x_train)
