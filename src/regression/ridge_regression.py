@@ -60,7 +60,7 @@ preprocessing = ColumnTransformer([
 #pipeline for logistic regression, using ridge regression as regularization
 logistic_pipeline = Pipeline([
     ("preprocessing", preprocessing),
-    ("model", Ridge())
+    ("model", Ridge(alpha = 1, random_state= 0))
 ])
 
 logistic_pipeline.fit(x_train, y_train)

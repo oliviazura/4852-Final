@@ -61,7 +61,7 @@ preprocessing = ColumnTransformer([
 #pipeline for logistic regression, using ridge regression as regularization
 mlp_pipeline = Pipeline([
     ("preprocessing", preprocessing),
-    ("model", MLPRegressor())
+    ("model", MLPRegressor(solver = "sgd",learning_rate_init = .1, alpha = .1, batch_size = 256, max_iter = 1000, random_state = 0))
 ])
 
 mlp_pipeline.fit(x_train, y_train)
