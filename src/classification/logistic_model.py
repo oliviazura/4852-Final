@@ -76,7 +76,7 @@ test_cm = confusion_matrix(y_test, test_predictions)
 print(test_cm)
 
 cm_display = ConfusionMatrixDisplay(confusion_matrix = test_cm, display_labels=["Not Depressed", "Depressed"])
-cm_display.plot()
+cm_display.plot(cmap=plt.cm.Reds)
 plt.savefig("visuals/logistic_confusion_matrix.png")
 
 f1 = f1_score(y_test, test_predictions)
