@@ -58,7 +58,7 @@ preprocessing = ColumnTransformer([
     ("num", num_pipeline, data_num)
 ])
 
-#pipeline for logistic regression, using ridge regression as regularization
+#pipeline for mlp, using ridge regression as regularization, and optimal learning rate/alpha/batch size
 mlp_pipeline = Pipeline([
     ("preprocessing", preprocessing),
     ("model", MLPRegressor(solver = "sgd",learning_rate_init = .1, alpha = .1, batch_size = 256, max_iter = 1000, random_state = 0))

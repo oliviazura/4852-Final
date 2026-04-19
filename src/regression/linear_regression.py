@@ -57,16 +57,16 @@ preprocessing = ColumnTransformer([
     ("num", num_pipeline, data_num)
 ])
 
-#pipeline for logistic regression, using ridge regression as regularization
-logistic_pipeline = Pipeline([
+#pipeline for linear regression, using ridge regression as regularization
+linear_pipeline = Pipeline([
     ("preprocessing", preprocessing),
     ("model", LinearRegression())
 ])
 
-logistic_pipeline.fit(x_train, y_train)
-train_predictions = logistic_pipeline.predict(x_train)
+linear_pipeline.fit(x_train, y_train)
+train_predictions = linear_pipeline.predict(x_train)
 
-test_predictions = logistic_pipeline.predict(x_test)
+test_predictions = linear_pipeline.predict(x_test)
 
 def rmse(squared_errors):
     return np.sqrt(np.mean(squared_errors))
